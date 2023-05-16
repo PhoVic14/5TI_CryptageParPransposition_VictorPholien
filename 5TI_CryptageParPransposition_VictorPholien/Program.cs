@@ -6,35 +6,53 @@ namespace _5TI_CryptageParPransposition_VictorPholien
     {
         static void Main(string[] args)
         {
-            methodes MesOutils = new methodes();
-            Console.WriteLine("Cryptage par transposition");
-            Console.Write("Entrez la clé : ");
-            string cle = Console.ReadLine();
+            bool recommencer = true;
 
-            Console.Write("Entrez le texte à crypter : ");
-            string texte = Console.ReadLine();
+            while (recommencer)
+            {
+                methodes MesOutils = new methodes();
+                Console.WriteLine("Cryptage par transposition");
+                Console.Write("Entrez la clé : ");
+                string cle = Console.ReadLine();
 
-            string texteSansEspaces;
-            MesOutils.RetireEspaces(texte, out texteSansEspaces);
+                if (MesOutils.(cle))
+                {
+                    Console.WriteLine("Clé invalide. Veuillez entrer une clé contenant uniquement des caractères alphabétiques.");
+                    continue;
+                }
 
-            char[,] matrice;
-            MesOutils.DimensionneMat(cle, texteSansEspaces, out matrice);
+                Console.Write("Entrez le texte à crypter : ");
+                string texte = Console.ReadLine();
 
-            MesOutils.EcritChainesDansMat(cle, texteSansEspaces, ref matrice);
+                string texteSansEspaces;
+                MesOutils.RetireEspaces(texte, out texteSansEspaces);
 
-            MesOutils.triLigne1(ref matrice);
+                char[,] matrice;
+                MesOutils.DimensionneMat(cle, texteSansEspaces, out matrice);
 
-            char[,] matriceTri;
-            MesOutils.ClasseCle(cle, out matriceTri);
+                MesOutils.EcritChainesDansMat(cle, texteSansEspaces, ref matrice);
 
-            MesOutils.AttribueRang(ref matrice, ref matriceTri);
+                MesOutils.triLigne1(ref matrice);
 
-            string chaineCryptee;
-            MesOutils.RealiseCrypt(matrice, out chaineCryptee);
+                char[,] matriceTri;
+                MesOutils.ClasseCle(cle, out matriceTri);
 
-            Console.WriteLine("Texte crypté : " + chaineCryptee);
-    }
+                MesOutils.AttribueRang(ref matrice, ref matriceTri);
 
-        
+                string chaineCryptee;
+                MesOutils.RealiseCrypt(matrice, out chaineCryptee);
+
+                Console.WriteLine("Texte crypté : " + chaineCryptee);
+
+                Console.Write("Voulez-vous recommencer (O/N) ? ");
+                string reponse = Console.ReadLine();
+
+                if (reponse.ToUpper() != "O")
+                    recommencer = false;
+
+                Console.WriteLine();
+            }
+        }
     }
 }
+

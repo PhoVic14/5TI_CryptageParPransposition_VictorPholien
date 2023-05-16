@@ -188,5 +188,21 @@ namespace _5TI_CryptageParPransposition_VictorPholien
                 i = i + 1;
             }
         }
+
+        /// <summary>
+        /// Verification de la cle
+        /// </summary>
+        /// <param name="cle"></param>
+        public void VerifierCle(string cle)
+        {
+            foreach (char c in cle)
+            {
+                if (!char.IsLetter(c))
+                {
+                    Console.WriteLine("Clé invalide. Veuillez entrer une clé contenant uniquement des caractères alphabétiques.");
+                    return;
+                }
+            }
+        }
     }
 }
